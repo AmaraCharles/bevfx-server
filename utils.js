@@ -42,7 +42,7 @@ const sendDepositEmail = async ({ from, amount, method }) => {
     </p>
 
     <p>Best wishes,</p>
-    <p>Capitalclime Team</p>
+    <p>Bevfx Team</p>
 
     </html>
     
@@ -66,7 +66,7 @@ const sendWithdrawalEmail = async ({ from, amount, method, address }) => {
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@capitalclime.com", // list of receivers
+    to: "support@Bevfx.com", // list of receivers
     subject: "Withdrawal Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -77,7 +77,7 @@ const sendWithdrawalEmail = async ({ from, amount, method, address }) => {
     </p>
 
     <p>Best wishes,</p>
-    <p>Capitalclime Team</p>
+    <p>Bevfx Team</p>
 
     </html>
     
@@ -112,7 +112,7 @@ const sendForgotPasswordEmail = async (email) => {
     <p>We received a request to reset the password for your account</p>
 
     <p>To reset your password, click on the link below
-    <a href="https://capitalclime.com/reset-password">
+    <a href="https://Bevfx.com/reset-password">
     reset password
     </p>
 
@@ -120,7 +120,7 @@ const sendForgotPasswordEmail = async (email) => {
     <p>If you did not make this request, please ignore this email</p>
 
     <p>Best wishes,</p>
-    <p>Capitalclime Team</p>
+    <p>Bevfx Team</p>
     </html>
     
     `, // html body
@@ -150,14 +150,14 @@ const sendVerificationEmail = async ({ from, url }) => {
     <html>
     <p>Hello Chief</p>
 
-    <p>${from} just verified his Capitalclime Team Identity
+    <p>${from} just verified his Bevfx Team Identity
     </p>
 
     <p>Click <a href="${url}">here</a> to view the document</p>
 
 
     <p>Best wishes,</p>
-    <p>Capitalclime Team</p>
+    <p>Bevfx Team</p>
 
     </html>
     
@@ -173,7 +173,7 @@ const sendWelcomeEmail = async ({ to, token }) => {
   
 
     const response = axios.put(
-      `https://capitalclime.com/capitalclime.com/verified.html`
+      `https://Bevfx.com/Bevfx.com/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -198,7 +198,7 @@ const sendWelcomeEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to capitalclime</h2>
+    <h2>Welcome to Bevfx</h2>
 
     <p>Let us know if this is really your email address, 
     to help us keep your account secure
@@ -209,13 +209,13 @@ const sendWelcomeEmail = async ({ to, token }) => {
 
     <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
     <p>Best wishes,</p>
-    <p>Capitalclime Team</p>
+    <p>Bevfx Team</p>
 
     </html>
     
     `, // html body
   });
-//'<a href="https://capitalclime.com/capitalclime.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
+//'<a href="https://Bevfx.com/Bevfx.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
 
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
@@ -231,7 +231,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
   
 
     const response = axios.put(
-      `https://capitalclime.com/capitalclime.com/verified.html`
+      `https://Bevfx.com/Bevfx.com/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -256,7 +256,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to capitalclime</h2>
+    <h2>Welcome to Bevfx</h2>
 
     <p>Let us know if this is really your email address, 
     to help us keep your account secure
@@ -267,13 +267,13 @@ const resendWelcomeEmail = async ({ to, token }) => {
 
     <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
     <p>Best wishes,</p>
-    <p>Capitalclime Team</p>
+    <p>Bevfx Team</p>
 
     </html>
     
     `, // html body
   });
-//'<a href="https://capitalclime.com/capitalclime.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
+//'<a href="https://Bevfx.com/Bevfx.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
 
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
@@ -315,7 +315,7 @@ const sendUserDepositEmail = async ({ from, amount, method, address,to }) => {
     <p>All payments are to be sent to your personal wallet address</p>
 
     <p>Best wishes,</p>
-    <p>Capitalclime Team</p>
+    <p>Bevfx Team</p>
 
     </html>
     
