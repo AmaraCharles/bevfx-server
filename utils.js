@@ -30,7 +30,7 @@ const sendDepositEmail = async ({ from, amount, method }) => {
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "optionsmarty@gmail.com", // list of receivers
+    to: "support@bevfx.com", // list of receivers
     subject: "Transaction Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
