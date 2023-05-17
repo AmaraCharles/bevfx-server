@@ -201,7 +201,7 @@ const sendWelcomeEmail = async ({ to, token }) => {
     <h2>Welcome to Bevfx</h2>
 
     <p>Let us know if this is really your email address, 
-    to help us keep your account secure
+    to help us keep your account secure.
     </p>
 
 
