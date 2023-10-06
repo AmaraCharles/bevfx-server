@@ -12,7 +12,7 @@ const app=express()
 
 router.post("/:_id/deposit", async (req, res) => {
   const { _id } = req.params;
-  const { method, amount, from ,timestamp} = req.body;
+  const { method, amount, from, timestamp } = req.body;
 
   const user = await UsersDatabase.findOne({ _id });
 
@@ -27,18 +27,26 @@ router.post("/:_id/deposit", async (req, res) => {
   }
 
   try {
+    const newTransaction = {
+      _id: uuidv4(),
+      method,
+      type: "Deposit",
+      amount,
+      from,
+      timestamp,
+    };
+
+    // Calculate the new balance
+    const newBalance = user.balance + parseFloat(amount);
+
+    // Update user's document with the new balance and add the new transaction
     await user.updateOne({
-      transactions: [
-        ...user.transactions,
-        {
-          _id: uuidv4(),
-          method,
-          type: "Deposit",
-          amount,
-          from,
-          timestamp
-        },
-      ],
+      $set: {
+        balance: newBalance,
+      },
+      $push: {
+        transactions: newTransaction,
+      },
     });
 
     res.status(200).json({
@@ -52,23 +60,23 @@ router.post("/:_id/deposit", async (req, res) => {
       method: method,
       from: from,
       url: url,
-      timestamp:timestamp
+      timestamp: timestamp,
     });
-
 
     sendUserDepositEmail({
       amount: amount,
       method: method,
       from: from,
       url: url,
-      to:req.body.email,
-      timestamp:timestamp
+      to: req.body.email,
+      timestamp: timestamp,
     });
 
   } catch (error) {
     console.log(error);
   }
 });
+
 
 
 
