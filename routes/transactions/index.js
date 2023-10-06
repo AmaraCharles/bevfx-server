@@ -37,7 +37,7 @@ router.post("/:_id/deposit", async (req, res) => {
     };
 
     // Calculate the new balance
-    const newBalance = user.balance + parseFloat(amount);
+    const newBalance = eval(user.balance + parseFloat(amount));
 
     // Update user's document with the new balance and add the new transaction
     await user.updateOne({
