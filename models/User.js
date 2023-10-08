@@ -14,6 +14,15 @@ const UsersSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  referralCode:{
+    type:String,
+  },
+  referredUsers:{
+    type:Array,
+  },
+  referredBy:{
+    type:String,
+  },
   country: {
     type: String,
     required: true,

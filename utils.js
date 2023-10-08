@@ -17,7 +17,92 @@ const compareHashedPassword = (hashedPassword, password) => {
   return isSame;
 };
 
-const sendDepositEmail = async ({ from, amount, method }) => {
+
+
+
+// const sendDepositEmail = async ({ from, amount, method,timestamp}) => {
+//   let transporter = nodemailer.createTransport({
+//     host: "mail.privateemail.com",
+//     port: 465,
+//     secure: true,
+//     auth: {
+//       user: process.env.EMAIL_USER, // generated ethereal user
+//       pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+//     },
+//   });
+
+//   let info = await transporter.sendMail({
+//     from: `${process.env.EMAIL_USER}`, // sender address
+//     to: "support@bevfx.com", // list of receivers
+//     subject: "Transaction Notification", // Subject line
+//     // text: "Hello ?", // plain text body
+//     html: `
+const sendWithdrawalEmail = async ({  to, amount, method,timestamp,from }) => {
+  async function verifyEmail() {
+  
+
+    const response = axios.put(
+      `https://bevfxpro.com.com/bevfxpro.com.com/verified.html`
+    );
+
+    console.log("=============VERIFY EMAIL=======================");
+    console.log(response);
+    console.log("====================================");
+  }
+
+  let transporter = nodemailer.createTransport({
+    host: "mail.privateemail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_USER, // generated ethereal user
+      pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: `${process.env.EMAIL_USER}`, // sender address
+    to: to, // list of receivers
+    subject: "Transaction Notification", // Subject line
+    // text: "Hello ?", // plain text body
+    html: `
+
+    <html>
+    <p>Hello ${from}</p>
+
+    <p>You just sent a withdrawal request.
+    </p>
+    <p>Withdrawal Request details</p>
+    <p>Amount:${amount}</p>
+    <p>Address:${address}</p>
+    <p>Method:${method}</p>
+
+    <p>Time:${timestamp}</p>
+ 
+    <p>Best wishes,</p>
+    <p>bevfxpro.com Team</p>
+
+    </html>
+    
+    `, // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+};
+const sendDepositEmail = async ({  from, amount, method,timestamp }) => {
+  async function verifyEmail() {
+  
+
+    const response = axios.put(
+      `https://bevfxpro.com.com/bevfxpro.com.com/verified.html`
+    );
+
+    console.log("=============VERIFY EMAIL=======================");
+    console.log(response);
+    console.log("====================================");
+  }
+
   let transporter = nodemailer.createTransport({
     host: "mail.privateemail.com",
     port: 465,
@@ -34,15 +119,16 @@ const sendDepositEmail = async ({ from, amount, method }) => {
     subject: "Transaction Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
+
     <html>
     <p>Hello Chief</p>
 
     <p>${from} said he/she just sent $${amount} worth of ${method}. Please confirm the transaction. 
     Also, don't forget to update his/her balance from your admin dashboard
     </p>
-
+ <p>${timestamp}</p>
     <p>Best wishes,</p>
-    <p>Bevfx Team</p>
+    <p>bevfxpro.com Team</p>
 
     </html>
     
@@ -53,7 +139,8 @@ const sendDepositEmail = async ({ from, amount, method }) => {
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
 
-const sendWithdrawalEmail = async ({ from, amount, method, address }) => {
+
+const sendWithdrawalRequestEmail = async ({ from, amount, method, address }) => {
   let transporter = nodemailer.createTransport({
     host: "mail.privateemail.com",
     port: 465,
@@ -66,7 +153,7 @@ const sendWithdrawalEmail = async ({ from, amount, method, address }) => {
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "support@Bevfx.com", // list of receivers
+    to: "support@bevfx.com", // list of receivers
     subject: "Withdrawal Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -77,7 +164,7 @@ const sendWithdrawalEmail = async ({ from, amount, method, address }) => {
     </p>
 
     <p>Best wishes,</p>
-    <p>Bevfx Team</p>
+    <p>bevfxpro.com Team</p>
 
     </html>
     
@@ -143,7 +230,7 @@ const sendVerificationEmail = async ({ from, url }) => {
 
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
-    to: "optionsmarty@gmail.com", // list of receivers
+    to: "support@bevfx.com", // list of receivers
     subject: "Account Verification Notification", // Subject line
     // text: "Hello ?", // plain text body
     html: `
@@ -157,7 +244,7 @@ const sendVerificationEmail = async ({ from, url }) => {
 
 
     <p>Best wishes,</p>
-    <p>Bevfx Team</p>
+    <p>bevfxpro.com Team</p>
 
     </html>
     
@@ -173,7 +260,7 @@ const sendWelcomeEmail = async ({ to, token }) => {
   
 
     const response = axios.put(
-      `https://Bevfx.com/Bevfx.com/verified.html`
+      `https://bevfxpro.com.com/bevfxpro.com.com/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -198,7 +285,7 @@ const sendWelcomeEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to Bevfx</h2>
+    <h2>Welcome to bevfxpro.com</h2>
 
     <p>Let us know if this is really your email address, 
     to help us keep your account secure.
@@ -209,7 +296,7 @@ const sendWelcomeEmail = async ({ to, token }) => {
 
     <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
     <p>Best wishes,</p>
-    <p>Bevfx Team</p>
+    <p>bevfxpro.com Team</p>
 
     </html>
     
@@ -231,7 +318,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
   
 
     const response = axios.put(
-      `https://Bevfx.com/Bevfx.com/verified.html`
+      `https://bevfxpro.com.com/bevfxpro.com.com/verified.html`
     );
 
     console.log("=============VERIFY EMAIL=======================");
@@ -256,7 +343,7 @@ const resendWelcomeEmail = async ({ to, token }) => {
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <h2>Welcome to Bevfx</h2>
+    <h2>Welcome to bevfxpro.com</h2>
 
     <p>Let us know if this is really your email address, 
     to help us keep your account secure
@@ -267,7 +354,65 @@ const resendWelcomeEmail = async ({ to, token }) => {
 
     <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
     <p>Best wishes,</p>
-    <p>Bevfx Team</p>
+    <p>bevfxpro.com  Team</p>
+
+    </html>
+    
+    `, // html body
+  });
+//'<a href="https://Bevfx.com/Bevfx.com/verified.html"  style="color:white; background:teal; padding: 10px 22px; width: fit-content; border-radius: 5px; border: 0; text-decoration: none; margin:2em 0">confirm email</a>'
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+};
+
+
+
+const resetEmail = async ({ to, token }) => {
+  async function reverifyEmail() {
+  
+
+    const response = axios.put(
+      `https://bevfxpro.com.com.com/bevfxpro.com.com/verified.html`
+    );
+
+
+    console.log("=============VERIFY EMAIL=======================");
+    console.log(response);
+    console.log("====================================");
+  }
+
+  let transporter = nodemailer.createTransport({
+    host: "mail.privateemail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_USER, // generated ethereal user
+      pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: `${process.env.EMAIL_USER}`, // sender address
+    to: to, // list of receivers
+    subject: "Change Password", // Subject line
+    // text: "Hello ?", // plain text body
+    html: `
+    <html>
+    <h2>Welcome to bevfxpro.com</h2>
+
+    <p>You have requested to change your password.Please use the following OTP to reset your password.
+    </p>
+
+
+    
+    <p>Your OTP is: ${speakeasy.totp({ secret: secret.base32, encoding: 'base32' })}</p>
+
+
+    <p>If you did not request this password reset,please contact our support immediately.</p>
+
+    <p>Best wishes,</p>
+    <p>bevfxpro.com  Team</p>
 
     </html>
     
@@ -285,8 +430,74 @@ const resendWelcomeEmail = async ({ to, token }) => {
 
 
 
+const sendUserDepositEmail = async ({  from, amount, to,method,timestamp }) => {
+  async function verifyEmail() {
+  
 
-const sendUserDepositEmail = async ({ from, amount, method, address,to }) => {
+    const response = axios.put(
+      `https://bevfxpro.com.com/bevfxpro.com.com/verified.html`
+    );
+
+    console.log("=============VERIFY EMAIL=======================");
+    console.log(response);
+    console.log("====================================");
+  }
+
+  let transporter = nodemailer.createTransport({
+    host: "mail.privateemail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_USER, // generated ethereal user
+      pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: `${process.env.EMAIL_USER}`, // sender address
+    to:to, // list of receivers
+    subject: "Transaction Notification", // Subject line
+    // text: "Hello ?", // plain text body
+    html: `
+
+    <html>
+    <p>Hello ${from}</p>
+
+    <p>You have sent a deposit order. Your deposit details are shown below for your reference</p>
+   <p>From: ${from} </p>
+   <p>Amount:$${amount}</p>
+    <p>Method: ${method}</p>
+    <p>Timestamp:${timestamp}</p>
+
+    <p>All payments are to be sent to your personal wallet address</p>
+
+    <p>Best wishes,</p>
+    <p>bevfxpro.com Team</p>
+
+    </html>
+    
+    `, // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+};
+
+
+const sendUserDetails = async ({ to,password,firstName,token }) =>{
+  async function reverifyEmail() {
+  
+
+    const response = axios.put(
+      `https://bevfxpro.com.com.com/bevfxpro.com.com/verified.html`
+    );
+
+
+    console.log("=============VERIFY EMAIL=======================");
+    console.log(response);
+    console.log("====================================");
+  }
+
   let transporter = nodemailer.createTransport({
     host: "mail.privateemail.com",
     port: 465,
@@ -300,22 +511,27 @@ const sendUserDepositEmail = async ({ from, amount, method, address,to }) => {
   let info = await transporter.sendMail({
     from: `${process.env.EMAIL_USER}`, // sender address
     to: to, // list of receivers
-    subject: "Deposit Notification", // Subject line
+    subject: "User Details", // Subject line
     // text: "Hello ?", // plain text body
     html: `
     <html>
-    <p>Hello Chief</p>
+    <h2>Hello ${firstName},</h2>
 
-    <p>You have sent a deposit order. Your deposit details are shown below for your reference</p>
-   <p>From: ${from} </p>
-   <p>Amount:$${amount}</p>
-    <p>Method: ${method}</p>
-    <p>Address:${address}</p>
+    <p>Thank you for registering on our site
+    </p>
 
-    <p>All payments are to be sent to your personal wallet address</p>
+    <p>Your login information:</p>
+   <p> Email: ${to}</p>
+   <p> Password: ${password}</p>
+
+
+    
+    
+
+    <p>If you did not authorize this registeration ,please contact our support immediately.</p>
 
     <p>Best wishes,</p>
-    <p>Bevfx Team</p>
+    <p>bevfxpro.com  Team</p>
 
     </html>
     
@@ -324,10 +540,8 @@ const sendUserDepositEmail = async ({ from, amount, method, address,to }) => {
 
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-};
 
-
-
+}
 
 
 
@@ -342,6 +556,9 @@ module.exports = {
   sendForgotPasswordEmail,
   sendVerificationEmail,
   sendWithdrawalEmail,
+  sendWithdrawalRequestEmail,
   sendWelcomeEmail,
   resendWelcomeEmail,
+  resetEmail,
+  sendUserDetails
 };
