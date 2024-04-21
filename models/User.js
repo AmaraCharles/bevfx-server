@@ -51,6 +51,9 @@ const UsersSchema = new mongoose.Schema({
   accounts: {
     type: Object,
   },
+  kyc: {
+    type: String,
+  },
   withdrawals: {
     type: Array,
   },
