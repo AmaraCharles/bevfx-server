@@ -55,6 +55,7 @@ router.post("/register", async (req, res) => {
       country,
       amountDeposited: 0,
       profit: 0,
+      condition:" ",
       balance: 0,
       kyc: "unverified",
       
