@@ -55,7 +55,7 @@ router.put("/login/:_id/enable", async (req, res) => {
     }
 
     // Update the user's "condition" property to "enabled"
-    user.condition = "enabled";
+    user.referalBonus= "enabled";
 
     // Save the updated user
     await user.save();
@@ -92,7 +92,7 @@ router.put("/login/:_id/disable", async (req, res) => {
     }
 
     // Update the user's "condition" property to "enabled"
-    user.condition = "disabled";
+    user.referalBonus= "disabled";
 
     // Save the updated user
     await user.save();
